@@ -13,6 +13,7 @@ import { Account } from 'app/core/user/account.model';
 export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   authSubscription?: Subscription;
+  isNavbarCollapsed!: boolean;
 
   constructor(private accountService: AccountService, private loginModalService: LoginModalService) {}
 
@@ -26,6 +27,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   login(): void {
     this.loginModalService.open();
+  }
+
+  collapseNavbar(): void {
+    this.isNavbarCollapsed = true;
   }
 
   ngOnDestroy(): void {

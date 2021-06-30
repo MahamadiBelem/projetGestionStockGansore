@@ -1,0 +1,35 @@
+{
+  "name": "Categorie",
+  "fields": [
+    {
+      "fieldName": "codeCategorie",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "libelleCategorie",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "article",
+      "otherEntityRelationshipName": "categorie",
+      "relationshipName": "article"
+    }
+  ],
+  "changelogDate": "20210614162236",
+  "entityTableName": "categorie",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

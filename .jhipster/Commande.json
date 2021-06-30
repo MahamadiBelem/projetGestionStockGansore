@@ -1,0 +1,59 @@
+{
+  "name": "Commande",
+  "fields": [
+    {
+      "fieldName": "codeCommande",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateCommande",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "libelleCommande",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "quantiteCommande",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "statusCommande",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "montantVerseCommande",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "dateLivraison",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "facture",
+      "otherEntityRelationshipName": "commande",
+      "relationshipName": "facture"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "client",
+      "otherEntityRelationshipName": "commande",
+      "relationshipName": "client",
+      "otherEntityField": "numeroCnibClient"
+    }
+  ],
+  "changelogDate": "20210614162136",
+  "entityTableName": "commande",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

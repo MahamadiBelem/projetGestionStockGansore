@@ -1,0 +1,95 @@
+<div>
+    <h2 id="page-heading">
+        <span>Articles</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-article" [routerLink]="['/article/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Nouveau
+            </span>
+        </button>
+    </h2>
+
+    <span>Filter</span> <input type="text" [(ngModel)]="filter" class="form-control">
+
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="articles?.length === 0">
+        <span>No articles found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="articles && articles.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="codeArticle"><span>Code Article</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="libelleArticle"><span>Libelle Article</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="paArticle"><span>Pa Article</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="pvArticle"><span>Pv Article</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="stockInitialArticle"><span>Stock Initial Article</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dateEnregistrementArticle"><span>Date Enregistrement Article</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="imageArticle"><span>Image Article</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="categorie.codeCategorie"><span>Categorie</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let article of articles | pureFilter:filter:'libelleArticle'">
+                    <td><a [routerLink]="['/article', article.id, 'view']">{{ article.id }}</a></td>
+                    <td>{{ article.codeArticle }}</td>
+                    <td>{{ article.libelleArticle }}</td>
+                    <td>{{ article.paArticle }}</td>
+                    <td>{{ article.pvArticle }}</td>
+                    <td>{{ article.stockInitialArticle }}</td>
+                    <td>{{ article.dateEnregistrementArticle | date:'mediumDate' }}</td>
+                    <td>
+                        <a *ngIf="article.imageArticle" (click)="openFile(article.imageArticleContentType, article.imageArticle)">open</a>
+                        <span *ngIf="article.imageArticle">{{ article.imageArticleContentType }}, {{ byteSize(article.imageArticle) }}</span>
+                    </td>
+                    <td>
+                        <div *ngIf="article.categorie">
+                            <a [routerLink]="['/categorie', article.categorie?.id, 'view']" >{{ article.categorie?.codeCategorie }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/article', article.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/article', article.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(article)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="articles && articles.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+
+
+
+<div style="box-shadow: 3px 3px 3px 3px; background-color: #E5E5E5 ; border-radius: 25px;">
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-article-heading">Create or edit a Article</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_codeArticle">Code Article</label>
+                    <input type="text" class="form-control" name="codeArticle" id="field_codeArticle"
+                           formControlName="codeArticle"/>
+                    <div *ngIf="editForm.get('codeArticle')!.invalid && (editForm.get('codeArticle')!.dirty || editForm.get('codeArticle')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codeArticle')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_libelleArticle">Libelle Article</label>
+                    <input type="text" class="form-control" name="libelleArticle" id="field_libelleArticle"
+                           formControlName="libelleArticle"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_paArticle">Pa Article</label>
+                    <input type="number" class="form-control" name="paArticle" id="field_paArticle"
+                           formControlName="paArticle"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_pvArticle">Pv Article</label>
+                    <input type="number" class="form-control" name="pvArticle" id="field_pvArticle"
+                           formControlName="pvArticle"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_stockInitialArticle">Stock Initial Article</label>
+                    <input type="number" class="form-control" name="stockInitialArticle" id="field_stockInitialArticle"
+                           formControlName="stockInitialArticle"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dateEnregistrementArticle">Date Enregistrement Article</label>
+                    <div class="input-group">
+                        <input id="field_dateEnregistrementArticle" type="text" class="form-control" name="dateEnregistrementArticle" ngbDatepicker #dateEnregistrementArticleDp="ngbDatepicker" formControlName="dateEnregistrementArticle"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateEnregistrementArticleDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_imageArticle">Image Article</label>
+                    <div>
+                        <div *ngIf="editForm.get('imageArticle')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('imageArticleContentType')!.value, editForm.get('imageArticle')!.value)">open</a><br>
+                            <span class="pull-left">{{ editForm.get('imageArticleContentType')!.value }}, {{ byteSize(editForm.get('imageArticle')!.value) }}</span>
+                            <button type="button" (click)="editForm.patchValue({imageArticle: null});editForm.patchValue({imageArticleContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_imageArticle" (change)="setFileData($event, 'imageArticle', false)"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="imageArticle" id="field_imageArticle"
+                           formControlName="imageArticle"/>
+                    <input type="hidden" class="form-control" name="imageArticleContentType" id="field_imageArticleContentType"
+                           formControlName="imageArticleContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_categorie">Categorie</label>
+                    <select class="form-control" id="field_categorie" name="categorie" formControlName="categorie">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="categorieOption.id === editForm.get('categorie')!.value?.id ? editForm.get('categorie')!.value : categorieOption" *ngFor="let categorieOption of categories; trackBy: trackById">{{ categorieOption.codeCategorie }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
