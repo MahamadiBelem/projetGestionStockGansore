@@ -50,6 +50,11 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private Long profilId;
+
+    private String profileNom;
+
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -70,6 +75,10 @@ public class UserDTO {
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
+        if(user.getProfil()!=null){
+            this.profilId=user.getProfil().getId();
+            this.profileNom=user.getProfil().getNomProfil();
+        }
     }
 
     public Long getId() {
@@ -174,6 +183,22 @@ public class UserDTO {
 
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public Long getProfilId() {
+        return profilId;
+    }
+
+    public void setProfilId(Long profilId) {
+        this.profilId = profilId;
+    }
+
+    public String getProfileNom() {
+        return profileNom;
+    }
+
+    public void setProfileNom(String profileNom) {
+        this.profileNom = profileNom;
     }
 
     // prettier-ignore

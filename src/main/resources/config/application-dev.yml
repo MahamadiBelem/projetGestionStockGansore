@@ -45,9 +45,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/gestionstks
+    url: jdbc:postgresql://localhost:5432/gstock
     username: postgres
-    password: bhm
+    password: admin
     hikari:
       poolName: Hikari
       auto-commit: false

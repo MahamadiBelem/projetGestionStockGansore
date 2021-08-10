@@ -2,8 +2,10 @@ package com.stock.service;
 
 import com.stock.config.Constants;
 import com.stock.domain.Authority;
+import com.stock.domain.Profil;
 import com.stock.domain.User;
 import com.stock.repository.AuthorityRepository;
+import com.stock.repository.ProfilRepository;
 import com.stock.repository.UserRepository;
 import com.stock.security.AuthoritiesConstants;
 import com.stock.security.SecurityUtils;
@@ -41,12 +43,15 @@ public class UserService {
 
     private final AuthorityRepository authorityRepository;
 
+    private final ProfilRepository profilRepository;
+
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, ProfilRepository profilRepository, CacheManager cacheManager) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
+        this.profilRepository = profilRepository;
         this.cacheManager = cacheManager;
     }
 
@@ -153,15 +158,34 @@ public class UserService {
         user.setPassword(encryptedPassword);
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());
+        Set<Authority> authorities = new HashSet<>();
         user.setActivated(true);
-        if (userDTO.getAuthorities() != null) {
-            Set<Authority> authorities = userDTO.getAuthorities().stream()
-                .map(authorityRepository::findById)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toSet());
-            user.setAuthorities(authorities);
+        if(userDTO.getProfilId()!=null) {
+            Set<Authority> profilAuthorities=profilRepository.findOne(userDTO.getProfilId()).getAuthorities();
+            if (profilAuthorities!=null) {
+                profilAuthorities.forEach(item->{
+                    authorities.add(authorityRepository.getOne(item.getName()));
+                });
+            }
+            user.setProfil(profilRepository.getOne(userDTO.getProfilId()));
+        } else {
+            Profil profil= new Profil();
+            profil= profilRepository.findByNomProfil("Invite");
+            if(profil!=null) {
+                Set<Authority> profilAuthoritiesInvite = profil.getAuthorities();
+                if (profilAuthoritiesInvite != null) {
+                    profilAuthoritiesInvite.forEach(item -> {
+                        authorities.add(authorityRepository.getOne(item.getName()));
+                    });
+                }
+
+                user.setProfil(profil);
+            }
         }
+        if(!authorities.contains("ROLE_USER")){
+            authorities.add(authorityRepository.getOne("ROLE_USER"));
+        }
+        user.setAuthorities(authorities);
         userRepository.save(user);
         this.clearUserCaches(user);
         log.debug("Created Information for User: {}", user);
@@ -190,14 +214,20 @@ public class UserService {
                 user.setImageUrl(userDTO.getImageUrl());
                 user.setActivated(userDTO.isActivated());
                 user.setLangKey(userDTO.getLangKey());
-                Set<Authority> managedAuthorities = user.getAuthorities();
-                managedAuthorities.clear();
-                userDTO.getAuthorities().stream()
-                    .map(authorityRepository::findById)
-                    .filter(Optional::isPresent)
-                    .map(Optional::get)
-                    .forEach(managedAuthorities::add);
-                this.clearUserCaches(user);
+                Set<Authority> authorities = new HashSet<>();
+                if(userDTO.getProfilId()!=null) {
+                    Set<Authority> profilAuthorities=profilRepository.findOne(userDTO.getProfilId()).getAuthorities();
+                    if (profilAuthorities!=null) {
+                        profilAuthorities.forEach(item->{
+                            authorities.add(authorityRepository.getOne(item.getName()));
+                        });
+                    }
+                    user.setProfil(profilRepository.getOne(userDTO.getProfilId()));
+                }
+                if(!authorities.contains("ROLE_USER")){
+                    authorities.add(authorityRepository.getOne("ROLE_USER"));
+                }
+                user.setAuthorities(authorities);
                 log.debug("Changed Information for User: {}", user);
                 return user;
             })

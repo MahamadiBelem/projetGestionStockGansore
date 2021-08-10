@@ -40,6 +40,7 @@
       }
     ],
     "enableTranslation": false,
-    "blueprints": []
+    "blueprints": [],
+    "lastLiquibaseTimestamp": 1628585036000
   }
 }
