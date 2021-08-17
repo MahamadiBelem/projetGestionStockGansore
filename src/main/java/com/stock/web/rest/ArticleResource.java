@@ -2,6 +2,8 @@ package com.stock.web.rest;
 
 import com.stock.domain.Article;
 import com.stock.repository.ArticleRepository;
+import com.stock.service.ArticleService;
+import com.stock.service.dto.ArticleDTO;
 import com.stock.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -13,7 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,8 +43,11 @@ public class ArticleResource {
 
     private final ArticleRepository articleRepository;
 
-    public ArticleResource(ArticleRepository articleRepository) {
+    private final ArticleService articleService;
+
+    public ArticleResource(ArticleRepository articleRepository, ArticleService articleService) {
         this.articleRepository = articleRepository;
+        this.articleService = articleService;
     }
 
     /**
@@ -54,12 +58,12 @@ public class ArticleResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/articles")
-    public ResponseEntity<Article> createArticle(@Valid @RequestBody Article article) throws URISyntaxException {
-        log.debug("REST request to save Article : {}", article);
-        if (article.getId() != null) {
+    public ResponseEntity<ArticleDTO> createArticle(@RequestBody ArticleDTO articleDTO) throws URISyntaxException {
+        log.debug("REST request to save Article : {}", articleDTO);
+        if (articleDTO.getId() != null) {
             throw new BadRequestAlertException("A new article cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Article result = articleRepository.save(article);
+        ArticleDTO result = articleService.save(articleDTO);
         return ResponseEntity.created(new URI("/api/articles/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -75,14 +79,14 @@ public class ArticleResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/articles")
-    public ResponseEntity<Article> updateArticle(@Valid @RequestBody Article article) throws URISyntaxException {
-        log.debug("REST request to update Article : {}", article);
-        if (article.getId() == null) {
+    public ResponseEntity<ArticleDTO> updateArticle(@Valid @RequestBody ArticleDTO articleDTO) throws URISyntaxException {
+        log.debug("REST request to update Article : {}", articleDTO);
+        if (articleDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Article result = articleRepository.save(article);
+        ArticleDTO result = articleService.save(articleDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, article.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, articleDTO.getId().toString()))
             .body(result);
     }
 
@@ -93,9 +97,9 @@ public class ArticleResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of articles in body.
      */
     @GetMapping("/articles")
-    public ResponseEntity<List<Article>> getAllArticles(Pageable pageable) {
+    public ResponseEntity<List<ArticleDTO>> getAllArticles(Pageable pageable) {
         log.debug("REST request to get a page of Articles");
-        Page<Article> page = articleRepository.findAll(pageable);
+        Page<ArticleDTO> page = articleService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -107,10 +111,10 @@ public class ArticleResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the article, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/articles/{id}")
-    public ResponseEntity<Article> getArticle(@PathVariable Long id) {
+    public ResponseEntity<ArticleDTO> getArticle(@PathVariable Long id) {
         log.debug("REST request to get Article : {}", id);
-        Optional<Article> article = articleRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(article);
+        ArticleDTO article = articleService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(article));
     }
 
     /**

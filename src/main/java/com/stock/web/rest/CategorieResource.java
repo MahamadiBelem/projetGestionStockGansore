@@ -2,6 +2,7 @@ package com.stock.web.rest;
 
 import com.stock.domain.Categorie;
 import com.stock.repository.CategorieRepository;
+import com.stock.service.dto.CategorieDTO;
 import com.stock.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
