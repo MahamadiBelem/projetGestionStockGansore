@@ -1,5 +1,5 @@
-<div class="modal-header">
-    <h4 class="modal-title">Sign in</h4>
+<div  class="modal-header" style="background-color: #6292e5;color: white">
+    <h4 class="modal-title" style="margin-left: 40%;">Connection</h4>
 
     <button aria-label="Close" data-dismiss="modal" class="close" type="button" (click)="activeModal.dismiss('closed')">
         <span aria-hidden="true">x</span>
@@ -7,6 +7,10 @@
 </div>
 
 <div class="modal-body">
+    <div align="center">
+        <img src="../../../content/images/02.jpg">
+    </div>
+    <br>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="alert alert-danger" *ngIf="authenticationError">
@@ -42,10 +46,10 @@
                 <a class="alert-link" (click)="requestResetPassword()">Did you forget your password?</a>
             </div>
 
-            <div class="alert alert-warning">
+            <!--div class="alert alert-warning">
                 <span>You don't have an account yet?</span>
                 <a class="alert-link" (click)="register()">Register a new account</a>
-            </div>
+            </div-->
         </div>
     </div>
 </div>

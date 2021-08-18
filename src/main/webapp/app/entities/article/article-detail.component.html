@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="article">
+            <h2><span>Article</span> {{ article.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Code Article</span></dt>
+                <dd>
+                    <span>{{ article.codeArticle }}</span>
+                </dd>
+                <dt><span>Libelle Article</span></dt>
+                <dd>
+                    <span>{{ article.libelleArticle }}</span>
+                </dd>
+                <dt><span>Pa Article</span></dt>
+                <dd>
+                    <span>{{ article.paArticle }}</span>
+                </dd>
+                <dt><span>Pv Article</span></dt>
+                <dd>
+                    <span>{{ article.pvArticle }}</span>
+                </dd>
+                <dt><span>Stock Initial Article</span></dt>
+                <dd>
+                    <span>{{ article.stockInitialArticle }}</span>
+                </dd>
+                <dt><span>Date Enregistrement Article</span></dt>
+                <dd>
+                    <span>{{ article.dateEnregistrementArticle }}</span>
+                </dd>
+                <dt><span>Image Article</span></dt>
+                <dd>
+                    <div *ngIf="article.imageArticle">
+                        <a (click)="openFile(article.imageArticleContentType, article.imageArticle)">open</a>
+                        {{ article.imageArticleContentType }}, {{ byteSize(article.imageArticle) }}
+                    </div>
+                </dd>
+                <dt><span>Categorie</span></dt>
+                <dd>
+                    <div *ngIf="article.categorie">
+                        <a [routerLink]="['/categorie', article.categorie?.id, 'view']">{{ article.categorie?.codeCategorie }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/article', article.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

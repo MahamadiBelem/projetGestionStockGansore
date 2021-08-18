@@ -1,0 +1,118 @@
+<div>
+    <!--h1> <span>Articles</span> </h1>
+    <br-->
+    <div style="background-color: #0070c0;color: white;">
+        <!--span class="span1">Arretes</span-->
+      <br>
+      
+    </div>
+    <br>
+
+    <h2 id="page-heading">
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-article" [routerLink]="['/article/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Nouveau
+            </span>
+        </button>
+
+        <button id="jh-create-entity" class="btn btn-primary float-left jh-create-entity create-article" [routerLink]="['/article/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Connu
+            </span>
+        </button>
+    </h2>
+<br>
+<br>
+    <span>Rechercher Article</span> <input type="text" [(ngModel)]="filter" class="form-control">
+    
+    <!--form class="form-inline pull-xs-right">
+        <!--span>Rechercher Article</span>
+        <input class="form-control" type="text" [(ngModel)]="filter" placeholder="Search"> <br>
+        <button class="btn btn-danger" type="submit">rechercher par Libelle</button>
+    </form-->
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="articles?.length === 0">
+        <span>No articles found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="articles && articles.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                
+                    <th scope="col"  jhiSortBy="codeArticle"><span>Code </span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="libelleArticle"><span>Libelle </span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="paArticle"><span>PA</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="pvArticle"><span>PV </span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="stockInitialArticle"><span>Disponibilité</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dateEnregistrementArticle"><span>Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="categorie.codeCategorie"><span>Categorie</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="imageArticle"><span>Image </span> <fa-icon icon="sort"></fa-icon></th>
+                    
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let article of articles | pureFilter:filter:'libelleArticle'">
+                    <!--td><a [routerLink]="['/article', article.id, 'view']">{{ article.id }}</a></td-->
+                    <td>{{ article.codeArticle }}</td>
+                    <td>{{ article.libelleArticle }}</td>
+                    <td>{{ article.paArticle }}</td>
+                    <td>{{ article.pvArticle }}</td>
+                    <td>{{ article.stockInitialArticle }}</td>
+                    <td>{{ article.dateEnregistrementArticle | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="article.categorie">
+                            <a [routerLink]="['/categorie', article.categorie?.id, 'view']" >{{ article.categorie?.codeCategorie }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <a *ngIf="article.imageArticle" (click)="openFile(article.imageArticleContentType, article.imageArticle)">open</a>
+                        <span *ngIf="article.imageArticle">{{ article.imageArticleContentType }}, {{ byteSize(article.imageArticle) }}</span>
+                    </td>
+
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/article', article.id, 'view']"
+                                    class="btn btn-info btn-outline">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/article', article.id, 'edit']"
+                                    class="btn btn-primary btn-outline">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(article)"
+                                    class="btn btn-danger btn-outline">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="articles && articles.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>
