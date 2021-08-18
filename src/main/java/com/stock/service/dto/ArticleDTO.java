@@ -9,6 +9,7 @@ public class ArticleDTO {
     public Float pvArticle;
     public Float paArticle;
     public Integer stockInitialArticle;
+    public Integer quantite;
     public LocalDate dateEnregistrementArticle;
     public String imageArticleContentType;
     public Long categorieId;
@@ -110,5 +111,30 @@ public class ArticleDTO {
 
     public void setImageArticle(byte[] imageArticle) {
         this.imageArticle = imageArticle;
+    }
+
+    public Integer getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(Integer quantite) {
+        this.quantite = quantite;
+    }
+
+    @Override
+    public String toString() {
+        return "ArticleDTO{" +
+            "id=" + id +
+            ", codeArticle='" + codeArticle + '\'' +
+            ", libelleArticle='" + libelleArticle + '\'' +
+            ", pvArticle=" + pvArticle +
+            ", paArticle=" + paArticle +
+            ", stockInitialArticle=" + stockInitialArticle +
+            ", quantite=" + quantite +
+            ", dateEnregistrementArticle=" + dateEnregistrementArticle +
+            ", categorieId=" + categorieId +
+            ", codeCategorie='" + codeCategorie + '\'' +
+            ", libelleCategorie='" + libelleCategorie + '\'' +
+            '}';
     }
 }

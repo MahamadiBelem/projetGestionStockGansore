@@ -5,6 +5,7 @@ import com.stock.domain.Categorie;
 import com.stock.repository.ArticleRepository;
 import com.stock.repository.CategorieRepository;
 import com.stock.service.dto.ArticleDTO;
+import com.stock.service.dto.XArticleDTO;
 import com.stock.service.mapper.ArticleMapper;
 import com.stock.web.rest.errors.CustomParameterizedException;
 import org.slf4j.Logger;
@@ -34,14 +35,35 @@ public class ArticleService {
     public ArticleDTO save(ArticleDTO articleDTO){
         log.debug("Request to save Article : {}", articleDTO);
         Article article=articleMapper.toEntity(articleDTO);
-        if(articleDTO.getCategorieId()!=null) {
-            Categorie categorie=categorieRepository.getOne(articleDTO.getCategorieId());
-            article.setCategorie(categorie);
-            article.setDateEnregistrementArticle(LocalDate.now());
-            article=articleRepository.save(article);
+        Integer stock=0;
+        if (article.getStockInitialArticle()==null){
+            stock=0;
         } else {
-            throw new CustomParameterizedException("Veillez selectionnez une catégorie");
+            stock=article.getStockInitialArticle();
         }
+        if(articleDTO.getId()!=null){
+            article=articleRepository.getOne(articleDTO.getId());
+            if(article.getId()!=null){
+                article.setDateEnregistrementArticle(LocalDate.now());
+                article.setStockInitialArticle(stock+articleDTO.getQuantite());
+                article=articleRepository.save(article);
+            } else {
+                throw new CustomParameterizedException("Veillez selectionnez une catégorie");
+            }
+
+        } else {
+            if(articleDTO.getCategorieId()!=null) {
+                Categorie categorie=categorieRepository.getOne(articleDTO.getCategorieId());
+                article.setCategorie(categorie);
+                article.setDateEnregistrementArticle(LocalDate.now());
+                article.setStockInitialArticle(stock+articleDTO.getQuantite());
+                article=articleRepository.save(article);
+
+            } else {
+                throw new CustomParameterizedException("Veillez selectionnez une catégorie");
+            }
+        }
+
         return articleMapper.toDto(article);
 
     }
@@ -49,6 +71,12 @@ public class ArticleService {
     public Page<ArticleDTO> findAll(Pageable pageable) {
         log.debug("Request to get all articles");
        return   articleRepository.findAll(pageable).map(articleMapper::toDto);
+    }
+
+    public Page<ArticleDTO> findAllWithCriteria(ArticleDTO articleDTO,Pageable pageable) {
+        log.debug("Request to get all articles");
+        return   articleRepository.findAllWithCriteria(articleDTO.getCodeArticle(),
+            articleDTO.getLibelleArticle(),articleDTO.getCategorieId(),pageable).map(articleMapper::toDto);
     }
 
     public ArticleDTO findOne(Long articleId) {
@@ -59,4 +87,6 @@ public class ArticleService {
         }
         return null;
     }
+
+
 }

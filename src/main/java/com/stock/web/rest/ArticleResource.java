@@ -4,11 +4,13 @@ import com.stock.domain.Article;
 import com.stock.repository.ArticleRepository;
 import com.stock.service.ArticleService;
 import com.stock.service.dto.ArticleDTO;
+import com.stock.service.dto.XArticleDTO;
 import com.stock.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.micrometer.core.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -96,10 +98,18 @@ public class ArticleResource {
      * @param pageable the pagination information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of articles in body.
      */
-    @GetMapping("/articles")
-    public ResponseEntity<List<ArticleDTO>> getAllArticles(Pageable pageable) {
-        log.debug("REST request to get a page of Articles");
-        Page<ArticleDTO> page = articleService.findAll(pageable);
+//    @GetMapping("/articles")
+//    public ResponseEntity<List<ArticleDTO>> getAllArticles(Pageable pageable) {
+//        log.debug("REST request to get a page of Articles");
+//        Page<ArticleDTO> page = articleService.findAll(pageable);
+//        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+//        return ResponseEntity.ok().headers(headers).body(page.getContent());
+//    }
+
+    @PostMapping("/find-articles-all")
+    public ResponseEntity<List<ArticleDTO>> getAllArticles(@RequestBody ArticleDTO articleDTO,Pageable pageable) {
+        log.debug("REST request to get a page of Articles"+articleDTO.toString());
+        Page<ArticleDTO> page = articleService.findAllWithCriteria(articleDTO,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -129,4 +139,5 @@ public class ArticleResource {
         articleRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
+
 }
