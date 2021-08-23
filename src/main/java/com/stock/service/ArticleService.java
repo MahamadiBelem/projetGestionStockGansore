@@ -35,17 +35,12 @@ public class ArticleService {
     public ArticleDTO save(ArticleDTO articleDTO){
         log.debug("Request to save Article : {}", articleDTO);
         Article article=articleMapper.toEntity(articleDTO);
-        Integer stock=0;
-        if (article.getStockInitialArticle()==null){
-            stock=0;
-        } else {
-            stock=article.getStockInitialArticle();
-        }
+
         if(articleDTO.getId()!=null){
             article=articleRepository.getOne(articleDTO.getId());
             if(article.getId()!=null){
                 article.setDateEnregistrementArticle(LocalDate.now());
-                article.setStockInitialArticle(stock+articleDTO.getQuantite());
+                article.setStockInitialArticle(articleDTO.getQuantite());
                 article=articleRepository.save(article);
             } else {
                 throw new CustomParameterizedException("Veillez selectionnez une catégorie");
@@ -56,7 +51,7 @@ public class ArticleService {
                 Categorie categorie=categorieRepository.getOne(articleDTO.getCategorieId());
                 article.setCategorie(categorie);
                 article.setDateEnregistrementArticle(LocalDate.now());
-                article.setStockInitialArticle(stock+articleDTO.getQuantite());
+                article.setStockInitialArticle(articleDTO.getQuantite());
                 article=articleRepository.save(article);
 
             } else {
