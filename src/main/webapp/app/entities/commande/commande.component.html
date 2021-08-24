@@ -1,15 +1,33 @@
 <div>
-    <h2 id="page-heading">
-        <span>Commandes</span>
+    <!--h1> <span>Articles</span> </h1>
+    <br-->
+    <div style="background-color: #0070c0;color: white;">
+        <!--span class="span1">Arretes</span-->
+      <br>
+      
+    </div>
+    <br>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-commande" [routerLink]="['/commande/new']">
+    <h2 id="page-heading">
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-article" [routerLink]="['/commande/new']">
             <fa-icon icon="plus"></fa-icon>
             <span>
             Nouveau
             </span>
         </button>
+
+        <button id="jh-create-entity" class="btn btn-primary float-left jh-create-entity create-article" [routerLink]="['/commande/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Connu
+            </span>
+        </button>
     </h2>
-    <span>Filter</span> <input type="text" [(ngModel)]="filter" class="form-control">
+<br>
+<br>
+
+    <span>Recherche Commande par Code</span> <input type="text" [(ngModel)]="filter" class="form-control">
 
 
 
@@ -25,13 +43,13 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="codeCommande"><span>Code Commande</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="dateCommande"><span>Date Commande</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="libelleCommande"><span>Libelle Commande</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="quantiteCommande"><span>Quantite Commande</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="statusCommande"><span>Status Commande</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="montantVerseCommande"><span>Montant Verse Commande</span> <fa-icon icon="sort"></fa-icon></th>
+                    <!--th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th-->
+                    <th scope="col"  jhiSortBy="codeCommande"><span>Code </span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dateCommande"><span>Date </span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="libelleCommande"><span>Libelle </span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="quantiteCommande"><span>Quantite </span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="statusCommande"><span>Status </span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="montantVerseCommande"><span>Montant Versé</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="dateLivraison"><span>Date Livraison</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="client.numeroCnibClient"><span>Client</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
@@ -39,7 +57,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let commande of commandes | pureFilter:filter:'codeCommande'">
-                    <td><a [routerLink]="['/commande', commande.id, 'view']">{{ commande.id }}</a></td>
+                    <!--td><a [routerLink]="['/commande', commande.id, 'view']">{{ commande.id }}</a></td-->
                     <td>{{ commande.codeCommande }}</td>
                     <td>{{ commande.dateCommande | date:'mediumDate' }}</td>
                     <td>{{ commande.libelleCommande }}</td>

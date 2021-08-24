@@ -4,7 +4,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-commande-heading">Create or edit a Commande</h2>
+            <h2 id="jhi-commande-heading">Mettre à Jour</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -15,11 +15,25 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" for="field_client">Client</label>
+                    <select class="form-control" id="field_client" name="client" formControlName="client">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="clientOption.id === editForm.get('client')!.value?.id ? editForm.get('client')!.value : clientOption" *ngFor="let clientOption of clients; trackBy: trackById">{{ clientOption.numeroCnibClient }}</option>
+                    </select>
+                </div>
+
+
+
+
+            <div class="row">
+            <div class="col">
+                <div class="form-group">
                     <label class="form-control-label" for="field_codeCommande">Code Commande</label>
                     <input type="text" class="form-control" name="codeCommande" id="field_codeCommande"
                            formControlName="codeCommande"/>
                 </div>
-
+            </div>
+                <div class="col">
                 <div class="form-group">
                     <label class="form-control-label" for="field_dateCommande">Date Commande</label>
                     <div class="input-group">
@@ -29,30 +43,43 @@
                         </span>
                     </div>
                 </div>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col">
                 <div class="form-group">
                     <label class="form-control-label" for="field_libelleCommande">Libelle Commande</label>
                     <input type="text" class="form-control" name="libelleCommande" id="field_libelleCommande"
                            formControlName="libelleCommande"/>
                 </div>
-
+                </div>
+                <div class="col">
                 <div class="form-group">
                     <label class="form-control-label" for="field_quantiteCommande">Quantite Commande</label>
                     <input type="number" class="form-control" name="quantiteCommande" id="field_quantiteCommande"
                            formControlName="quantiteCommande"/>
                 </div>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col">
                 <div class="form-group">
                     <label class="form-control-label" for="field_statusCommande">Status Commande</label>
                     <input type="checkbox" class="form-control" name="statusCommande" id="field_statusCommande"
                            formControlName="statusCommande"/>
                 </div>
+                </div>
 
+                <div class="col">
                 <div class="form-group">
                     <label class="form-control-label" for="field_montantVerseCommande">Montant Verse Commande</label>
                     <input type="number" class="form-control" name="montantVerseCommande" id="field_montantVerseCommande"
                            formControlName="montantVerseCommande"/>
                 </div>
+                </div>
+            </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_dateLivraison">Date Livraison</label>
@@ -64,13 +91,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" for="field_client">Client</label>
-                    <select class="form-control" id="field_client" name="client" formControlName="client">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="clientOption.id === editForm.get('client')!.value?.id ? editForm.get('client')!.value : clientOption" *ngFor="let clientOption of clients; trackBy: trackById">{{ clientOption.numeroCnibClient }}</option>
-                    </select>
-                </div>
+
             </div>
 
             <div>
@@ -83,6 +104,8 @@
                 </button>
             </div>
         </form>
+        <br>
+        <br>
     </div>
 </div>
 </div>

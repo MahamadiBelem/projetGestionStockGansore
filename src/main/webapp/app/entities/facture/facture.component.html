@@ -1,17 +1,35 @@
 <div>
-    <h2 id="page-heading">
-        <span>Factures</span>
+    <!--h1> <span>Articles</span> </h1>
+    <br-->
+    <div style="background-color: #0070c0;color: white;">
+        <!--span class="span1">Arretes</span-->
+      <br>
+      
+    </div>
+    <br>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-facture" [routerLink]="['/facture/new']">
+    <h2 id="page-heading">
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-article" [routerLink]="['/facture/new']">
             <fa-icon icon="plus"></fa-icon>
             <span>
             Nouveau
             </span>
         </button>
-    </h2>
 
+        <button id="jh-create-entity" class="btn btn-primary float-left jh-create-entity create-article" [routerLink]="['/facture/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Connu
+            </span>
+        </button>
+    </h2>
+<br>
+<br>
+    <!--span>Rechercher Article</span> <input type="text" [(ngModel)]="filter" class="form-control"-->
     
- <span>Filter</span> <input type="text" [(ngModel)]="filter" class="form-control">
+   
+ <span>Rechercher</span> <input type="text" [(ngModel)]="filter" class="form-control">
 
     <jhi-alert-error></jhi-alert-error>
 
@@ -25,10 +43,10 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="numeroFacture"><span>Numero Facture</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="libelleFacture"><span>Libelle Facture</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="prescipteurFacture"><span>Prescipteur Facture</span> <fa-icon icon="sort"></fa-icon></th>
+                    <!--th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th-->
+                    <th scope="col"  jhiSortBy="numeroFacture"><span>Numero </span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="libelleFacture"><span>Libelle </span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="prescipteurFacture"><span>Prescipteur </span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="commande.codeCommande"><span>Commande</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="article.codeArticle"><span>Article</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
@@ -36,7 +54,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let facture of factures | pureFilter:filter:'numeroFacture'">
-                    <td><a [routerLink]="['/facture', facture.id, 'view']">{{ facture.id }}</a></td>
+                    <!--td><a [routerLink]="['/facture', facture.id, 'view']">{{ facture.id }}</a></td-->
                     <td>{{ facture.numeroFacture }}</td>
                     <td>{{ facture.libelleFacture }}</td>
                     <td>{{ facture.prescipteurFacture }}</td>

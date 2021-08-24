@@ -24,10 +24,6 @@ import { RouterModule } from '@angular/router';
         path: 'facture',
         loadChildren: () => import('./facture/facture.module').then(m => m.GestionStockFactureModule),
       },
-      {
-        path: 'profil',
-        loadChildren: () => import('./profil/profil.module').then(m => m.GestionStockProfilModule),
-      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

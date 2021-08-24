@@ -14,11 +14,81 @@
       </div>
   </div>
 
-    
   <form class="form-inline pull-xs-right">
     <input class="form-control" type="text" placeholder="Search">
     <button class="btn btn-danger" type="submit">rechercher article</button>
-</form>
+  </form>
+<br>  
+<br>
+<br>
+
+  <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="row g-3 my-2">
+    <div style="background-color: coral;" class="col-md-3">
+        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+            <div>
+                <a class="dropdown-item" routerLink="article" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <h3 class="fs-2">124</h3>
+                    <p class="fs-5">Mes Articles</p>
+                </a>
+            </div>
+            <i class="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+        </div>
+    </div>
+
+    <div  class="col-md-3">
+        <div class="p-3 bg-succes shadow-sm d-flex justify-content-around align-items-center rounded">
+            <div>
+                <a class="dropdown-item" routerLink="commande" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <h3 class="fs-2">20</h3>
+                    <p class="fs-5">Mes Commandes</p>
+                </a>
+            </div>
+            <i
+                class="fas fa-hand-holding-usd fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+        </div>
+    </div>
+
+    <div style="background-color: coral;" class="col-md-3">
+        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+            <div>
+                <a class="dropdown-item" routerLink="facture" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <h3 class="fs-2">220</h3>
+                    <p class="fs-5">Faire Achats</p>
+                </a>
+            </div>
+            <i class="fas fa-truck fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+        </div>
+    </div>
+
+    <div style="background-color: coral;" class="col-md-3">
+        <div  class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+            <div>
+                <a class="dropdown-item" routerLink="facture" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <h3 class="fs-2">120</h3>
+                    <p class="fs-5">Factures</p>
+                </a>
+            </div>
+            <i class="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  <!--form class="form-inline pull-xs-right">
+    <input class="form-control" type="text" placeholder="Search">
+    <button class="btn btn-danger" type="submit">rechercher article</button>
+</form-->
 <br>   
 <div class="progress">
   <!--div class="progress">
@@ -31,7 +101,7 @@
 
 <br>
   
-  <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="card-deck"> 
+  <!--div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="card-deck"> 
       <br>
       <div class="card"   style="box-shadow: 2px 2px 2px 2px; background-color: #E5E5E5 ; border-radius: 15px; width: 18rem;">
           <div class="card-body">
@@ -39,7 +109,7 @@
             <p class="card-text">Créer, Modifier, supprimer un article.</p>
             <!--a href="#" class="btn btn-primary">Gérer les articles</a-->
   
-            <a class="dropdown-item" routerLink="article" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+            <!--a class="dropdown-item" routerLink="article" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
               <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
               <span class="btn btn-primary">Gérer les articles</span>
           </a>
@@ -53,7 +123,7 @@
             <p class="card-text">réer, Modifier, supprimer une commande</p>
             <!--a href="#" class="btn btn-primary">Gerer les categories</a-->
   
-          <a class="dropdown-item" routerLink="commande" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+          <!--a class="dropdown-item" routerLink="commande" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
               <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
               <span class="btn btn-primary">Gerer les commandes</span>
           </a>
@@ -66,7 +136,7 @@
             <p class="card-text">Créer, Modifier,Voir un client.</p>
             <!--a href="#" >Gerer les clients</a-->
   
-          <a class="dropdown-item" routerLink="client" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+          <!--a class="dropdown-item" routerLink="client" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
               <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
               <span class="btn btn-primary">Gerer les clients</span>
           </a>
@@ -79,24 +149,24 @@
             <p class="card-text">Créer, Modifier, Désactiver un utilisateur.</p>
             <!--a href="#" class="btn btn-primary">Gerer les utilisateurs</a-->
   
-            <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+            <!--a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
               <fa-icon icon="user" [fixedWidth]="true"></fa-icon>
               <span class="btn btn-primary">Gerer les utilisateurs</span>
           </a>
           </div>
         </div> 
-  </div>        
+  </div-->        
   <br>
   <br>
   
       
-      <!-- Content Row *jhiHasAnyAuthority="'ROLE_ADMIN'"-->
+      <!-- Content Row *jhiHasAnyAuthority="'ROLE_ADMIN'">
       <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="card-deck"> 
           <div class="card" style="box-shadow: 2px 2px 2px 2px; background-color: #E5E5E5 ; border-radius: 15px; width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">GESTION DES ACHATS </h5>
               <p class="card-text">Créer, Modifier, un achat</p>
-              <!--a href="#" class="btn btn-primary">Gerer achats</a-->
+              <!--a href="#" class="btn btn-primary">Gerer achats</a>
   
               <a class="dropdown-item" routerLink="article" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                 <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
@@ -109,7 +179,7 @@
             <div class="card-body">
               <h5 class="card-title">IMPRIMER FACTURE</h5>
               <p class="card-text">Créer, Modifier, Supprimer une facture</p>
-              <!--a href="#" class="btn btn-primary">Gerer facture</a-->
+              <!--a href="#" class="btn btn-primary">Gerer facture</a>
   
             <a class="dropdown-item" routerLink="facture" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" (click)="collapseNavbar()">
                 <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
@@ -122,7 +192,7 @@
             <div class="card-body">
               <h5 class="card-title">CREER CATEGORIE</h5>
               <p class="card-text">Créer, Modifier,Supprimer une categorie</p>
-              <!--a href="#" class="btn btn-primary">Gerer qualification</a-->
+              <!--a href="#" class="btn btn-primary">Gerer qualification</a>
   
               <a class="dropdown-item" routerLink="categorie" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                 <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
@@ -130,7 +200,7 @@
             </a>
             </div>
           </div>     
-    </div>   
+    </div-->   
     <br>
   
   <div style="background-color: #0070c0;color: white;">
