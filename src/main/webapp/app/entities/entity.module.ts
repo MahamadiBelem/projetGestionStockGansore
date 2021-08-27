@@ -24,6 +24,10 @@ import { RouterModule } from '@angular/router';
         path: 'facture',
         loadChildren: () => import('./facture/facture.module').then(m => m.GestionStockFactureModule),
       },
+      {
+        path: 'ligne-commande',
+        loadChildren: () => import('./ligne-commande/ligne-commande.module').then(m => m.GestionStockLigneCommandeModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

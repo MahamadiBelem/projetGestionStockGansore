@@ -140,4 +140,8 @@ public class ArticleResource {
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 
+    @PostMapping("/add-quantite-of-article")
+    public ArticleDTO addQuantiteOfArticle(@RequestBody ArticleDTO articleDTO){
+        return articleService.addQuantite(articleDTO);
+    }
 }

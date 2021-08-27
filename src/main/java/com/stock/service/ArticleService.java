@@ -83,5 +83,17 @@ public class ArticleService {
         return null;
     }
 
+    public ArticleDTO addQuantite(ArticleDTO articleDTO) {
+        log.debug("Request to add quantité"+articleDTO);
+        //Article article =articleMapper.toEntity(articleDTO);
+        Article article=articleRepository.getOne(articleDTO.getId());
+        if(article.getId()!=null){
+            article.setStockInitialArticle(article.getStockInitialArticle()+articleDTO.getQuantite());
+            articleRepository.save(article);
+            return articleMapper.toDto(article);
+        }
+        throw new CustomParameterizedException("Article introuvable");
+    }
+
 
 }

@@ -2,6 +2,8 @@ package com.stock.web.rest;
 
 import com.stock.domain.Commande;
 import com.stock.repository.CommandeRepository;
+import com.stock.service.CommandeService;
+import com.stock.service.dto.CommandeDTO;
 import com.stock.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -13,7 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,9 +41,11 @@ public class CommandeResource {
     private String applicationName;
 
     private final CommandeRepository commandeRepository;
+    private final CommandeService commandeService;
 
-    public CommandeResource(CommandeRepository commandeRepository) {
+    public CommandeResource(CommandeRepository commandeRepository, CommandeService commandeService) {
         this.commandeRepository = commandeRepository;
+        this.commandeService = commandeService;
     }
 
     /**
@@ -52,13 +55,25 @@ public class CommandeResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new commande, or with status {@code 400 (Bad Request)} if the commande has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping("/commandes")
+/*    @PostMapping("/commandes")
     public ResponseEntity<Commande> createCommande(@RequestBody Commande commande) throws URISyntaxException {
         log.debug("REST request to save Commande : {}", commande);
         if (commande.getId() != null) {
             throw new BadRequestAlertException("A new commande cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Commande result = commandeRepository.save(commande);
+        return ResponseEntity.created(new URI("/api/commandes/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    } */
+
+    @PostMapping("/commandes")
+    public ResponseEntity<CommandeDTO> createCommande(@RequestBody CommandeDTO commandeDTO) throws URISyntaxException {
+        log.debug("REST request to save Commande : {}", commandeDTO);
+        if (commandeDTO.getId() != null) {
+            throw new BadRequestAlertException("A new commande cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        CommandeDTO result = commandeService.saveComande(commandeDTO);
         return ResponseEntity.created(new URI("/api/commandes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
