@@ -26,6 +26,9 @@ public class LigneCommande implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "quantiter")
+    private Float quantiteCommander;
+
     @ManyToOne
     @JsonIgnoreProperties(value = "ligneCommandes", allowSetters = true)
     private Commande commande;
@@ -76,6 +79,14 @@ public class LigneCommande implements Serializable {
     public LigneCommande article(Article article) {
         this.article = article;
         return this;
+    }
+
+    public Float getQuantiteCommander() {
+        return quantiteCommander;
+    }
+
+    public void setQuantiteCommander(Float quantiteCommander) {
+        this.quantiteCommander = quantiteCommander;
     }
 
     public void setArticle(Article article) {

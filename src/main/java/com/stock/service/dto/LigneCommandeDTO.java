@@ -6,7 +6,7 @@ import java.io.Serializable;
  * A DTO for the {@link com.stock.domain.LigneCommande} entity.
  */
 public class LigneCommandeDTO implements Serializable {
-    
+
     private Long id;
 
     private String description;
@@ -14,8 +14,10 @@ public class LigneCommandeDTO implements Serializable {
 
     private Long commandeId;
 
+    private Float quantiteCommander;
+
     private Long articleId;
-    
+
     public Long getId() {
         return id;
     }
@@ -46,6 +48,14 @@ public class LigneCommandeDTO implements Serializable {
 
     public void setArticleId(Long articleId) {
         this.articleId = articleId;
+    }
+
+    public Float getQuantiteCommander() {
+        return quantiteCommander;
+    }
+
+    public void setQuantiteCommander(Float quantiteCommander) {
+        this.quantiteCommander = quantiteCommander;
     }
 
     @Override
