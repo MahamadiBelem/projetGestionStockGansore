@@ -36,13 +36,16 @@ public class Commande implements Serializable {
     private String libelleCommande;
 
     @Column(name = "quantite_commande")
-    private Float quantiteCommande;
+    private Integer quantiteCommande;
 
     @Column(name = "status_commande")
     private Boolean statusCommande;
 
     @Column(name = "montant_verse_commande")
     private Float montantVerseCommande;
+
+    @Column(name = "montant_total")
+    private Float montantTotal;
 
     @Column(name = "date_livraison")
     private LocalDate dateLivraison;
@@ -103,16 +106,24 @@ public class Commande implements Serializable {
         this.libelleCommande = libelleCommande;
     }
 
-    public Float getQuantiteCommande() {
+    public Integer getQuantiteCommande() {
         return quantiteCommande;
     }
 
-    public Commande quantiteCommande(Float quantiteCommande) {
+    public Float getMontantTotal() {
+        return montantTotal;
+    }
+
+    public void setMontantTotal(Float montantTotal) {
+        this.montantTotal = montantTotal;
+    }
+
+    public Commande quantiteCommande(Integer quantiteCommande) {
         this.quantiteCommande = quantiteCommande;
         return this;
     }
 
-    public void setQuantiteCommande(Float quantiteCommande) {
+    public void setQuantiteCommande(Integer quantiteCommande) {
         this.quantiteCommande = quantiteCommande;
     }
 

@@ -58,24 +58,31 @@ public class CommandeService {
     @Transactional
     public CommandeDTO saveComande(CommandeDTO commandeDTO){
         log.debug("Request to save Commande : {}", commandeDTO);
-        Commande commade=commandeMapper.toEntity(commandeDTO);
+        Commande commande=commandeMapper.toEntity(commandeDTO);
+        Float montanTotal= (float) 0;
+        Integer quantiteTotal=0;
         List<ArticleDTO> articles=commandeDTO.getArticles();
         if (articles.size()>0){
             Client client=clientRepository.getOne(commandeDTO.getClientId());
             if(client.getId()!=null){
-                commade.setClient(client);
-                commade=commandeRepository.save(commade);
+                commande.setClient(client);
+                commande=commandeRepository.save(commande);
 
                 for(ArticleDTO articleDTO: articles){
                     LigneCommande ligneCommande=new LigneCommande();
                     Article article=articleMapper.toEntity(articleDTO);
+                    quantiteTotal=quantiteTotal+articleDTO.getQuantite();
+                    montanTotal=montanTotal+article.getPvArticle();
                     ligneCommande.setArticle(article);
-                    ligneCommande.setCommande(commade);
+                    ligneCommande.setCommande(commande);
                     ligneCommandeRepository.save(ligneCommande);
                     article.setStockInitialArticle(article.getStockInitialArticle()-articleDTO.getQuantite());
                     articleRepository.save(article);
                 }
-                return commandeMapper.toDto(commade);
+                commande.setMontantTotal(montanTotal);
+                commande.setQuantiteCommande(quantiteTotal);
+                commandeRepository.save(commande);
+                return commandeMapper.toDto(commande);
             } else{
                 throw new CustomParameterizedException("Client introuvable");
             }
