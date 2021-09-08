@@ -15,7 +15,7 @@ public class CommandeDTO {
 
     private String libelleCommande;
 
-    private Float quantiteCommande;
+    private Integer quantiteCommande;
 
     private Boolean statusCommande;
 
@@ -60,11 +60,11 @@ public class CommandeDTO {
         this.libelleCommande = libelleCommande;
     }
 
-    public Float getQuantiteCommande() {
+    public Integer getQuantiteCommande() {
         return quantiteCommande;
     }
 
-    public void setQuantiteCommande(Float quantiteCommande) {
+    public void setQuantiteCommande(Integer quantiteCommande) {
         this.quantiteCommande = quantiteCommande;
     }
 
@@ -107,4 +107,6 @@ public class CommandeDTO {
     public void setArticles(List<ArticleDTO> articles) {
         this.articles = articles;
     }
+
+
 }

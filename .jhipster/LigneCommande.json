@@ -21,6 +21,10 @@
     {
       "fieldName": "description",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "quantiteCommander",
+      "fieldType": "Integer"
     }
   ],
   "changelogDate": "20210826101904",

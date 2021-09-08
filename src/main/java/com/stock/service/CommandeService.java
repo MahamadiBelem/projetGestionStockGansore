@@ -74,6 +74,7 @@ public class CommandeService {
                     quantiteTotal=quantiteTotal+articleDTO.getQuantite();
                     montanTotal=montanTotal+article.getPvArticle();
                     ligneCommande.setArticle(article);
+                    ligneCommande.setQuantiteCommander(articleDTO.getQuantite());
                     ligneCommande.setCommande(commande);
                     ligneCommandeRepository.save(ligneCommande);
                     article.setStockInitialArticle(article.getStockInitialArticle()-articleDTO.getQuantite());

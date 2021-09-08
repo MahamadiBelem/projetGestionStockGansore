@@ -1,12 +1,13 @@
 package com.stock.service.mapper;
 
 
+import com.stock.domain.Client;
 import com.stock.domain.Commande;
 import com.stock.service.dto.CommandeDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {Client.class})
 public interface CommandeMapper extends EntityMapper<CommandeDTO, Commande> {
 
     @Mapping(source = "client.id", target = "clientId")

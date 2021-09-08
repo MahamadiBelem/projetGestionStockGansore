@@ -15,7 +15,7 @@
     },
     {
       "fieldName": "quantiteCommande",
-      "fieldType": "Float"
+      "fieldType": "Integer"
     },
     {
       "fieldName": "statusCommande",
