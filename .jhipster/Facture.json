@@ -1,0 +1,45 @@
+{
+  "name": "Facture",
+  "fields": [
+    {
+      "fieldName": "numeroFacture",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "libelleFacture",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "prescipteurFacture",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "commande",
+      "otherEntityRelationshipName": "facture",
+      "relationshipName": "commande",
+      "otherEntityField": "codeCommande"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "article",
+      "otherEntityRelationshipName": "facture",
+      "relationshipName": "article",
+      "otherEntityField": "codeArticle"
+    }
+  ],
+  "changelogDate": "20210614162336",
+  "entityTableName": "facture",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

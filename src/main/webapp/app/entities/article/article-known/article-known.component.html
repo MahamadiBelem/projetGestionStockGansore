@@ -1,0 +1,225 @@
+
+
+
+
+
+
+
+
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+    <div class="modal-header save-modal-header-style">
+          <h2>Renseigner nouvelles données</h2>
+          <button type="button" class="close" (click)="cancel()" aria-label="Close" >
+              <span aria-hidden="true">&times;</span>
+          </button>
+          
+      </div>
+      <div class="modal-body">
+  <div class="row justify-content-center">
+      <div class="col-4">
+          
+              <div>
+                  <jhi-alert-error></jhi-alert-error>
+  
+                  <div class="form-group" [hidden]="true">
+                      <label for="id" jhiTranslate="global.field.id">ID</label>
+                      <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                  </div>
+  
+
+                  <div class="form-group">
+                    <label class="form-control-label" for="field_categorie">Choisir Article </label>
+                    <select class="form-control" id="field_categorie" name="categorie" formControlName="categorie">
+                        <option [ngValue]="null"></option>
+                        <!--option [ngValue]="categorieOption.id === editForm.get('categorie')!.value?.id ? editForm.get('categorie')!.value : categorieOption" *ngFor="let categorieOption of categories; trackBy: trackById">{{ categorieOption.codeCategorie }}</option-->
+                    </select>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-control-label" for="field_stockInitialArticle">Quantité Entrente</label>
+                    <input type="number" class="form-control" name="stockInitialArticle" id="field_stockInitialArticle"
+                           formControlName="stockInitialArticle"/>
+                </div>
+                  <!--div class="form-group">
+                      <label class="form-control-label" jhiTranslate="gestionFormationApp.region.libelleRegion" for="field_libelleRegion">Libelle Region</label>
+                      <input type="text" class="form-control" name="libelleRegion" id="field_libelleRegion"
+                             formControlName="libelleRegion"/>
+                      <div *ngIf="editForm.get('libelleRegion')!.invalid && (editForm.get('libelleRegion')!.dirty || editForm.get('libelleRegion')!.touched)">
+                          <small class="form-text text-danger"
+                                 *ngIf="editForm.get('libelleRegion')?.errors?.required" jhiTranslate="entity.validation.required">
+                          This field is required.
+                          </small>
+                      </div-->
+                  </div>
+              </div>
+  
+              <div>
+                
+              </div>
+         
+      </div>
+  </div>
+      </div>
+      <div class="modal-footer">
+          <button  type="button" id="cancel-save"  class="btn btn-outline-warning" (click)="cancel()">
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+          </button>
+  
+          <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-outline-primary">
+              <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+          </button>
+      </div>
+  </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--div style="box-shadow: 2px 2px 2px 2px; background-color: #cfc6c6 ; border-radius: 25px;">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <form>
+                <h2 id="jhi-article-heading">Renseigner les nouvelles données</h2>
+    
+                <div>
+                    <jhi-alert-error></jhi-alert-error>
+    
+                    <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                        <label for="id">ID</label>
+                        <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                    </div>
+                <div class="row"> 
+                    <!--div class="col">
+                        <div class="form-group">
+                        <label class="form-control-label" for="field_codeArticle">Code Article</label>
+                        <input type="text" class="form-control" name="codeArticle" id="field_codeArticle"
+                               formControlName="codeArticle"/>
+                        <div *ngIf="editForm.get('codeArticle')!.invalid && (editForm.get('codeArticle')!.dirty || editForm.get('codeArticle')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('codeArticle')?.errors?.required">
+                            This field is required.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_libelleArticle">Libelle </label>
+                        <input type="text" class="form-control" name="libelleArticle" id="field_libelleArticle"
+                               formControlName="libelleArticle"/>
+                    </div>
+                </div>
+             </div-->
+    
+                    <!--div class="form-group">
+                        <label class="form-control-label" for="field_paArticle">Prix Achat</label>
+                        <input type="number" class="form-control" name="paArticle" id="field_paArticle"
+                               formControlName="paArticle"/>
+                    </div>
+    
+                    <div class="row"> 
+                        <!--div class="col">
+                            <div class="form-group">
+                            <label class="form-control-label" for="field_pvArticle">Prix Vente</label>
+                            <input type="number" class="form-control" name="pvArticle" id="field_pvArticle"
+                               formControlName="pvArticle"/>
+                            </div>
+                        </div>
+                            <div class="col"> 
+                            <div class="form-group">
+                                <label class="form-control-label" for="field_stockInitialArticle">Quantité Entrente</label>
+                                <input type="number" class="form-control" name="stockInitialArticle" id="field_stockInitialArticle"
+                                       formControlName="stockInitialArticle"/>
+                            </div>
+                       </div>
+                    </div>
+    
+    
+                <div class="row"> 
+                    <!--div class="col">
+                
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_dateEnregistrementArticle">Date Enregistrement Article</label>
+                        <div class="input-group">
+                            <input id="field_dateEnregistrementArticle" type="text" class="form-control" name="dateEnregistrementArticle" ngbDatepicker #dateEnregistrementArticleDp="ngbDatepicker" formControlName="dateEnregistrementArticle"/>
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-secondary" (click)="dateEnregistrementArticleDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                            </span>
+                        </div>
+                    </div>
+                    </div>
+    
+                    <div class="col"> 
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_categorie">Choisir Article </label>
+                        <select class="form-control" id="field_categorie" name="categorie" formControlName="categorie">
+                            <option [ngValue]="null"></option>
+                            <!--option [ngValue]="categorieOption.id === editForm.get('categorie')!.value?.id ? editForm.get('categorie')!.value : categorieOption" *ngFor="let categorieOption of categories; trackBy: trackById">{{ categorieOption.codeCategorie }}</option>
+                        </select>
+                    </div>
+                   </div>
+                </div>
+    
+    
+                    <!--div class="form-group">
+                        <label class="form-control-label" for="field_imageArticle">Image Article</label>
+                        <div>
+                            <div *ngIf="editForm.get('imageArticle')!.value" class="form-text text-danger clearfix">
+                                <a class="pull-left" (click)="openFile(editForm.get('imageArticleContentType')!.value, editForm.get('imageArticle')!.value)">open</a><br>
+                                <span class="pull-left">{{ editForm.get('imageArticleContentType')!.value }}, {{ byteSize(editForm.get('imageArticle')!.value) }}</span>
+                                <button type="button" (click)="editForm.patchValue({imageArticle: null});editForm.patchValue({imageArticleContentType: null});"
+                                        class="btn btn-secondary btn-xs pull-right">
+                                    <fa-icon icon="times"></fa-icon>
+                                </button>
+                            </div>
+                            <input type="file" id="file_imageArticle" (change)="setFileData($event, 'imageArticle', false)"/>
+                        </div>
+                        <input type="hidden" class="form-control" name="imageArticle" id="field_imageArticle"
+                               formControlName="imageArticle"/>
+                        <input type="hidden" class="form-control" name="imageArticleContentType" id="field_imageArticleContentType"
+                               formControlName="imageArticleContentType" />
+                    </div>
+    
+    
+                </div>
+    
+                <div>
+                    <button type="button" id="cancel-save" class="btn btn-secondary" >
+                        <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                    </button>
+    
+                    <button type="submit" id="save-entity"  class="btn btn-primary">
+                        <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                    </button>
+                    <br>
+                    <br>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div-->
+    

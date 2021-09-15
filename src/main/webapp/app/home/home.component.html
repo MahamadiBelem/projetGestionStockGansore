@@ -1,0 +1,477 @@
+<div style="background-color: #0070c0;color: white;">
+    <!--span class="span1">Arretes</span-->
+  <br>
+  
+  </div>
+  <br>
+  
+  <div class="progress">
+      <div class="progress">
+        <div class="progress-bar bg-warning" role="progressbar" style="width: 75%; background-color: red;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <div class="progress">
+        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%; background-color: chartreuse;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+  </div>
+
+  <!--form class="form-inline pull-xs-right">
+    <input class="form-control" type="text" placeholder="Search">
+    <!--button class="btn btn-danger" type="submit">rechercher article</button>
+  </form-->
+  <br>
+  <div class="row"> 
+    <div class="col-4">
+      <span>Rechercher</span> <input type="text" [(ngModel)]="filter" class="form-control">
+    </div>
+  </div>
+<br>  
+<br>
+
+
+  <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="row g-3 my-2">
+    <div style="background-color: coral;" class="col-md-3">
+        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+            <div>
+                <a class="dropdown-item" routerLink="article" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <h3 class="fs-2">124</h3>
+                    <p class="fs-5">Mes Articles</p>
+                </a>
+            </div>
+            <i class="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+        </div>
+    </div>
+
+    <div  class="col-md-3">
+        <div class="p-3 bg-succes shadow-sm d-flex justify-content-around align-items-center rounded">
+            <div>
+                <a class="dropdown-item" routerLink="facture" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <h3 class="fs-2">20</h3>
+                    <p class="fs-5">Faire Achats</p>
+                </a>
+            </div>
+            <i
+                class="fas fa-hand-holding-usd fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+        </div>
+    </div>
+
+    <div style="background-color: coral;" class="col-md-3">
+        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+            <div>
+                <a class="dropdown-item" routerLink="facture" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <h3 class="fs-2">220</h3>
+                    <p class="fs-5">Factures</p>
+                </a>
+            </div>
+            <i class="fas fa-truck fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+        </div>
+    </div>
+
+    <div style="background-color: coral;" class="col-md-3">
+        <div  class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+            <div>
+                <a class="dropdown-item" routerLink="commande" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <h3 class="fs-2">120</h3>
+                    <p class="fs-5">Mes Commandes</p>
+                </a>
+            </div>
+            <i class="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  <!--form class="form-inline pull-xs-right">
+    <input class="form-control" type="text" placeholder="Search">
+    <button class="btn btn-danger" type="submit">rechercher article</button>
+</form-->
+<br>   
+<div class="progress">
+  <!--div class="progress">
+    <div class="progress-bar bg-warning" role="progressbar" style="width: 75%; background-color: red;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+  </div-->
+  <div class="progress">
+    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%; background-color: chartreuse;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+</div>
+
+<br>
+  
+  <!--div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="card-deck"> 
+      <br>
+      <div class="card"   style="box-shadow: 2px 2px 2px 2px; background-color: #E5E5E5 ; border-radius: 15px; width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">GESTION DES ARTICLES</h5>
+            <p class="card-text">Créer, Modifier, supprimer un article.</p>
+            <!--a href="#" class="btn btn-primary">Gérer les articles</a-->
+  
+            <!--a class="dropdown-item" routerLink="article" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+              <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
+              <span class="btn btn-primary">Gérer les articles</span>
+          </a>
+          </div>
+      </div>
+      <br>
+  
+        <div class="card" style="box-shadow: 2px 2px 2px 2px; background-color: #E5E5E5 ; border-radius: 15px; width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">GESTION DES COMMANDES</h5>
+            <p class="card-text">réer, Modifier, supprimer une commande</p>
+            <!--a href="#" class="btn btn-primary">Gerer les categories</a-->
+  
+          <!--a class="dropdown-item" routerLink="commande" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+              <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
+              <span class="btn btn-primary">Gerer les commandes</span>
+          </a>
+          </div>
+        </div>
+  
+        <div class="card" style="box-shadow: 2px 2px 2px 2px; background-color: #E5E5E5 ; border-radius: 15px; width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">GESTION DES CLIENTS</h5>
+            <p class="card-text">Créer, Modifier,Voir un client.</p>
+            <!--a href="#" >Gerer les clients</a-->
+  
+          <!--a class="dropdown-item" routerLink="client" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+              <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
+              <span class="btn btn-primary">Gerer les clients</span>
+          </a>
+          </div>
+        </div>
+  
+        <div class="card" style="box-shadow: 2px 2px 2px 2px; background-color: #E5E5E5 ; border-radius: 15px; width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Utilisateurs</h5>
+            <p class="card-text">Créer, Modifier, Désactiver un utilisateur.</p>
+            <!--a href="#" class="btn btn-primary">Gerer les utilisateurs</a-->
+  
+            <!--a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+              <fa-icon icon="user" [fixedWidth]="true"></fa-icon>
+              <span class="btn btn-primary">Gerer les utilisateurs</span>
+          </a>
+          </div>
+        </div> 
+  </div-->        
+  <br>
+  <br>
+  
+      
+      <!-- Content Row *jhiHasAnyAuthority="'ROLE_ADMIN'">
+      <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="card-deck"> 
+          <div class="card" style="box-shadow: 2px 2px 2px 2px; background-color: #E5E5E5 ; border-radius: 15px; width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">GESTION DES ACHATS </h5>
+              <p class="card-text">Créer, Modifier, un achat</p>
+              <!--a href="#" class="btn btn-primary">Gerer achats</a>
+  
+              <a class="dropdown-item" routerLink="article" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
+                <span class="btn btn-primary">Gerer achats</span>
+            </a>
+            </div>
+          </div>
+  
+          <div class="card" style="box-shadow: 2px 2px 2px 2px; background-color: #E5E5E5 ; border-radius: 15px; width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">IMPRIMER FACTURE</h5>
+              <p class="card-text">Créer, Modifier, Supprimer une facture</p>
+              <!--a href="#" class="btn btn-primary">Gerer facture</a>
+  
+            <a class="dropdown-item" routerLink="facture" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" (click)="collapseNavbar()">
+                <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
+                <span class="btn btn-primary">Gerer facture</span>
+            </a>
+            </div>
+          </div>
+  
+          <div class="card" style="box-shadow: 2px 2px 2px 2px; background-color: #E5E5E5 ; border-radius: 15px; width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">CREER CATEGORIE</h5>
+              <p class="card-text">Créer, Modifier,Supprimer une categorie</p>
+              <!--a href="#" class="btn btn-primary">Gerer qualification</a>
+  
+              <a class="dropdown-item" routerLink="categorie" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
+                <span class="btn btn-primary">Gerer qualification</span>
+            </a>
+            </div>
+          </div>     
+    </div-->   
+  
+  <div style="background-color: #0070c0;color: white;">
+      <!--span class="span1">Arretes</span-->
+  <br>
+  
+  </div>
+  <br>
+    
+
+    
+
+<!--div class="row">
+    <div class="col-md-3">
+        <span class="hipster img-fluid rounded"></span>
+    </div>
+
+    <div class="col-md-9">
+        <h1 class="display-4">Welcome, Java Hipster!</h1>
+
+        <p class="lead">This is your homepage</p>
+
+        <div [ngSwitch]="isAuthenticated()">
+            <div class="alert alert-success" *ngSwitchCase="true">
+                <span id="home-logged-message" *ngIf="account">You are logged in as user "{{ account.login }}".</span>
+            </div>
+
+            <div class="alert alert-warning" *ngSwitchCase="false">
+                <span>If you want to </span>
+                <a class="alert-link" (click)="login()">sign in</a><span>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
+            </div>
+
+            <div class="alert alert-warning" *ngSwitchCase="false">
+                <span>You don't have an account yet?</span>&nbsp;
+                <a class="alert-link" routerLink="account/register">Register a new account</a>
+            </div>
+        </div>
+
+        <p>
+            If you have any question on JHipster:
+        </p>
+
+        <ul>
+            <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer">JHipster homepage</a></li>
+            <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">JHipster on Stack Overflow</a></li>
+            <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer">JHipster bug tracker</a></li>
+            <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">JHipster public chat room</a></li>
+            <li><a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer">follow @jhipster on Twitter</a></li>
+        </ul>
+
+        <p>
+            <span>If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">GitHub</a>!
+        </p>
+    </div>
+</div-->
+
+
+
+
+
+
+
+
+<div>
+  <!--h1> <span>Articles</span> </h1>
+  <br-->
+  <div style="background-color: #0070c0;color: white;">
+      <!--span class="span1">Arretes</span-->
+    <br>
+    
+  </div>
+  <br>
+
+  <!--h2 id="page-heading">
+
+      <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-article" [routerLink]="['/article/new']">
+          <fa-icon icon="plus"></fa-icon>
+          <span>
+          Nouveau
+          </span>
+      </button>
+
+      <button id="jh-create-entity" class="btn btn-primary float-left jh-create-entity create-article" [routerLink]="['/article/known']">
+          <fa-icon icon="plus"></fa-icon>
+          <span>
+          Connu
+          </span>
+      </button>
+  </h2>
+<br-->
+<br>
+  <!--span>Rechercher Article</span> <input type="text" [(ngModel)]="filter" class="form-control"-->
+  
+  <!--form class="form-inline pull-xs-right">
+      <!--span>Rechercher Article</span>
+      <input class="form-control" type="text" [(ngModel)]="filter" placeholder="Search"> <br>
+      <button class="btn btn-danger" type="submit">rechercher par Libelle</button>
+  </form-->
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="articles?.length === 0">
+      <span>No articles found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="articles && articles.length > 0">
+      <table class="table table-striped" aria-describedby="page-heading">
+          <thead>
+              <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+              
+                  <!--th scope="col"  jhiSortBy="codeArticle"><span>Code </span> <fa-icon icon="sort"></fa-icon></th-->
+                  <th scope="col"  jhiSortBy="libelleArticle"><span>Libelle </span> <fa-icon icon="sort"></fa-icon></th>
+                  <!--th scope="col"  jhiSortBy="paArticle"><span>PA</span> <fa-icon icon="sort"></fa-icon></th-->
+                  <th scope="col"  jhiSortBy="pvArticle"><span>PV </span> <fa-icon icon="sort"></fa-icon></th>
+                  <th scope="col"  jhiSortBy="stockInitialArticle"><span>Disponibilité</span> <fa-icon icon="sort"></fa-icon></th>
+                  <!--th scope="col"  jhiSortBy="dateEnregistrementArticle"><span>Date</span> <fa-icon icon="sort"></fa-icon></th>
+                  <th scope="col"  jhiSortBy="categorie.codeCategorie"><span>Categorie</span> <fa-icon icon="sort"></fa-icon></th-->
+                  <th scope="col"  jhiSortBy="imageArticle"><span>Image </span> <fa-icon icon="sort"></fa-icon></th>
+                  
+                  <th scope="col"></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let article of articles | pureFilter:filter:'libelleArticle'">
+                  <!--td><a [routerLink]="['/article', article.id, 'view']">{{ article.id }}</a></td-->
+                  <!--td>{{ article.codeArticle }}</td-->
+                  <td>{{ article.libelleArticle }}</td>
+                  <!--td>{{ article.paArticle }}</td-->
+                  <td>{{ article.pvArticle }}</td>
+                  <td>{{ article.stockInitialArticle }}</td>
+                  <!--td>{{ article.dateEnregistrementArticle | date:'mediumDate' }}</td-->
+                  <!--td>
+                      <div *ngIf="article.categorie">
+                          <a [routerLink]="['/categorie', article.categorie?.id, 'view']" >{{ article.categorie?.codeCategorie }}</a>
+                      </div>
+                  </td-->
+                  <td>
+                      <a *ngIf="article.imageArticle" (click)="openFile(article.imageArticleContentType, article.imageArticle)">open</a>
+                      <span *ngIf="article.imageArticle">{{ article.imageArticleContentType }}, {{ byteSize(article.imageArticle) }}</span>
+                  </td>
+
+                  <td class="text-right">
+                      <div class="btn-group">
+                          <button type="submit"
+                                  [routerLink]="['/article', article.id, 'view']"
+                                  class="btn btn-info btn-outline">
+                              <fa-icon icon="eye"></fa-icon>
+                              <span class="d-none d-md-inline">View</span>
+                          </button>
+
+                          <button type="submit"
+                                  [routerLink]="['/article', article.id, 'edit']"
+                                  class="btn btn-primary btn-outline">
+                              <fa-icon icon="pencil-alt"></fa-icon>
+                              <span class="d-none d-md-inline">Edit</span>
+                          </button>
+
+                          <button type="submit" (click)="delete(article)"
+                                  class="btn btn-danger btn-outline">
+                              <fa-icon icon="times"></fa-icon>
+                              <span class="d-none d-md-inline">Delete</span>
+                          </button>
+                      </div>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+
+  <div *ngIf="articles && articles.length > 0">
+      <div class="row justify-content-center">
+          <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+      </div>
+
+      <div class="row justify-content-center">
+          <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<br>
+
+<div class="card-body">
+  <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+                
+              <th scope="col" ><span>Libelle</span></th>
+              <th scope="col" ><span>PV</span></th>
+              <th scope="col" ><span>Disponibilité</span></th>
+              <th scope="col" ><span>Image</span></th>
+              <!--th scope="col" ><span>Ville</span></th>
+              <th scope="col" ><span>Localisation</span></th>
+              <th scope="col" ><span>Telephone 1</span></th>
+              <th scope="col" ><span>Telephone 2</span></th-->
+              <!--th scope="col" ><span>Arrete</span></th>
+              <th scope="col" ><span>Agrement</span></th>
+              <th scope="col" ><span>Date de Signature </span></th>
+              <th scope="col" ><span>Validité</span></th>
+              <!--tth scope="col" ><span>Qualification</span></th-->
+              <!--th scope="col"></th-->
+          </tr>
+      </thead>
+          <!--tfoot>
+              <tr>
+                  <th>Name</th>
+                  <th>Position</th>
+                  <th>Office</th>
+                  <th>Age</th>
+                  <th>Start date</th>
+                  <th>Salary</th>
+              </tr>
+          </tfoot          | filter:term-->
+          <tbody>
+              <tr>
+                  <td>Tiger Nixon</td>
+                  <td>System Architect</td>
+                  <td>Edinburgh</td>
+                  <td>61</td>
+                  <!--td>2011/04/25 </td>
+                  <td>$320,8000</td>
+                  <td>2011/04/25</td>
+                  <td>$320,800</td>
+                  <!--td>ATI-2017-001</td> 
+                  <td>actif</td>
+                  <td>ventes materiels</td-->
+              </tr>
+              <tr>
+                  <td>Garrett Winters</td>
+                  <td>Accountant</td>
+                  <td>Tokyo</td>
+                  <td>63</td>
+                  <!--td>2011/07/25</td>
+                  <td>$170,750</td>
+                  <td>2011/07/25</td>
+                  <td>$170,750</td>
+                  <!--td>ATI-2017-001</td>
+                  <td>actif</td>
+                  <td>ventes materiels</td-->
+              </tr>
+              <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <!--td>2009/01/12</td>
+                  <td>$86,000</td>
+                  <td>2009/01/12</td>
+                  <td>$86,000</td>
+                  <!--td>ATI-2017-001</td>
+                  <td>actif</td>
+                  <td>ventes materiels</td-->
+              </tr>
+              
+          </tbody>
+      </table>
+  </div>
+</div>
+
+<br>

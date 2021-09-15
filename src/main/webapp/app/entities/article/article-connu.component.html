@@ -1,0 +1,18 @@
+<div class="row" style="background: rosybrown;">
+<div class="col-4"> 
+<div class="form-group">
+    <label class="form-control-label" for="field_article">Article</label>
+    <select class="form-control" id="field_article" name="article" formControlName="article">
+        <option [ngValue]="null"></option>
+        <!--option [ngValue]="articleOption.id === editForm.get('article')!.value?.id ? editForm.get('article')!.value : articleOption" *ngFor="let articleOption of articles; trackBy: trackById">{{ articleOption.codeArticle }}</option-->
+    </select>
+</div>
+</div>
+
+<div class="col-4">
+    <div class="form-group">
+        <label class="form-control-label" >Quantité Entrant </label>
+        <input type="text" class="form-control" name="libelleArticle" id="field_libelleArticle"/>
+    </div>
+</div>
+</div>

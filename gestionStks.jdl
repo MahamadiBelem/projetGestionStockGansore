@@ -1,0 +1,49 @@
+entity Article{
+        codeArticle String required,
+        libelleArticle String,
+        paArticle Float,
+        pvArticle Float,
+        stockInitialArticle Integer,
+        dateEnregistrementArticle LocalDate,
+        imageArticle Blob
+}
+
+entity Client{
+        numeroCnibClient String,
+        nomClient String,
+        prenomClient String,
+        telephone1Client String,
+        telephone2Client String,
+        villeClient String,
+        emailClient String
+}
+
+entity Commande{
+        codeCommande String,
+        dateCommande LocalDate,
+        libelleCommande String,
+        quantiteCommande Float,
+        statusCommande Boolean,
+        montantVerseCommande Float,
+        dateLivraison LocalDate
+}
+
+entity Categorie{
+        codeCategorie String required,
+        libelleCategorie String
+}
+
+entity Facture{
+        numeroFacture String,
+        libelleFacture TextBlob,
+        prescipteurFacture String
+}
+
+relationship OneToMany {
+Client{commande(codeCommande)} to Commande{client(numeroCnibClient)},
+Categorie{article(codeArticle)} to Article{categorie(codeCategorie)}, 
+Commande{facture(numeroFacture)} to Facture{Commande(codeCommande)},
+Article{facture(numeroFacture)} to Facture{article(codeArticle)} 
+}
+
+paginate Article,Commande,Client,Facture,Categorie with pagination

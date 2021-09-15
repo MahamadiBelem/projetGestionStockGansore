@@ -1,0 +1,52 @@
+{
+  "name": "Client",
+  "fields": [
+    {
+      "fieldName": "numeroCnibClient",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nomClient",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prenomClient",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephone1Client",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephone2Client",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "villeClient",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "emailClient",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "commande",
+      "otherEntityRelationshipName": "client",
+      "relationshipName": "commande"
+    }
+  ],
+  "changelogDate": "20210614162036",
+  "entityTableName": "client",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,73 @@
+
+<div style="box-shadow: 3px 3px 3px 3px; background-color: #E5E5E5 ; border-radius: 25px;">
+<div class="row justify-content-center">
+    <div class="col-4">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-client-heading">Mettre à Jour</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_numeroCnibClient">Numero Cnib Client</label>
+                    <input type="text" class="form-control" name="numeroCnibClient" id="field_numeroCnibClient"
+                           formControlName="numeroCnibClient"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nomClient">Nom Client</label>
+                    <input type="text" class="form-control" name="nomClient" id="field_nomClient"
+                           formControlName="nomClient"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_prenomClient">Prenom Client</label>
+                    <input type="text" class="form-control" name="prenomClient" id="field_prenomClient"
+                           formControlName="prenomClient"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_telephone1Client">Telephone 1 Client</label>
+                    <input type="text" class="form-control" name="telephone1Client" id="field_telephone1Client"
+                           formControlName="telephone1Client"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_telephone2Client">Telephone 2 Client</label>
+                    <input type="text" class="form-control" name="telephone2Client" id="field_telephone2Client"
+                           formControlName="telephone2Client"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_villeClient">Ville Client</label>
+                    <input type="text" class="form-control" name="villeClient" id="field_villeClient"
+                           formControlName="villeClient"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_emailClient">Email Client</label>
+                    <input type="text" class="form-control" name="emailClient" id="field_emailClient"
+                           formControlName="emailClient"/>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+        <br>
+        <br>
+    </div>
+</div>
+</div>

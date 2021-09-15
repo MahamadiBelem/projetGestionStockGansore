@@ -1,0 +1,61 @@
+{
+  "name": "Article",
+  "fields": [
+    {
+      "fieldName": "codeArticle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelleArticle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "paArticle",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "pvArticle",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "stockInitialArticle",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dateEnregistrementArticle",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "imageArticle",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "facture",
+      "otherEntityRelationshipName": "article",
+      "relationshipName": "facture"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "categorie",
+      "otherEntityRelationshipName": "article",
+      "relationshipName": "categorie",
+      "otherEntityField": "codeCategorie"
+    }
+  ],
+  "changelogDate": "20210614161936",
+  "entityTableName": "article",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

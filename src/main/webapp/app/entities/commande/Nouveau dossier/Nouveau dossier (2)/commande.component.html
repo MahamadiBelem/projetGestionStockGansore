@@ -1,0 +1,110 @@
+<div>
+    <!--h1> <span>Articles</span> </h1>
+    <br-->
+    <div style="background-color: #0070c0;color: white;">
+        <!--span class="span1">Arretes</span-->
+      <br>
+      
+    </div>
+    <br>
+
+    <h2 id="page-heading">
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-article" [routerLink]="['/commande/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Nouveau
+            </span>
+        </button>
+
+        <button id="jh-create-entity" class="btn btn-primary float-left jh-create-entity create-article" ([routerLink]="['/commande/new']")>
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Connu
+            </span>
+        </button>
+    </h2>
+<br>
+<br>
+
+    <span>Recherche Commande par Code</span> <input type="text" [(ngModel)]="filter" class="form-control">
+
+
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="commandes?.length === 0">
+        <span>No commandes found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="commandes && commandes.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <!--th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th-->
+                    <th scope="col"  jhiSortBy="codeCommande"><span>Code </span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dateCommande"><span>Date </span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="libelleCommande"><span>Libelle </span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="quantiteCommande"><span>Quantite </span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="statusCommande"><span>Status </span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="montantVerseCommande"><span>Montant Versé</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dateLivraison"><span>Date Livraison</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="client.numeroCnibClient"><span>Client</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let commande of commandes | pureFilter:filter:'codeCommande'">
+                    <!--td><a [routerLink]="['/commande', commande.id, 'view']">{{ commande.id }}</a></td-->
+                    <td>{{ commande.codeCommande }}</td>
+                    <td>{{ commande.dateCommande | date:'mediumDate' }}</td>
+                    <td>{{ commande.libelleCommande }}</td>
+                    <td>{{ commande.quantiteCommande }}</td>
+                    <td>{{ commande.statusCommande }}</td>
+                    <td>{{ commande.montantVerseCommande }}</td>
+                    <td>{{ commande.dateLivraison | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="commande.client">
+                            <a [routerLink]="['/client', commande.client?.id, 'view']" >{{ commande.client?.numeroCnibClient }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                               (click)="viewmodal(commande)"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/commande', commande.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(commande)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="commandes && commandes.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>
